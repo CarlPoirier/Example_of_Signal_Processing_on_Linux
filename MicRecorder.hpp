@@ -1,6 +1,6 @@
 #include <pulse/simple.h>
 #include <pulse/error.h>
-
+#include <iostream>
 
 class MicRecorder {
 
@@ -15,22 +15,22 @@ public:
         static const pa_sample_spec ss = {
             .format = PA_SAMPLE_S16LE,
             .rate = 44100,
-            .channels = 2
+            .channels = 1
         };
         
         // Create the recording stream
         if (!(s = pa_simple_new(NULL, "SigProc", PA_STREAM_RECORD, NULL, "record", &ss, NULL, NULL, &error))) {
-            fprintf(stderr, __FILE__": pa_simple_new() failed: %s\n", pa_strerror(error));
+            std::cerr << ": pa_simple_new() failed: " << pa_strerror(error) << std::endl;
         }
         
     }
 
 
-    void Record(int16_t* buffer, int buffer_size) {
+    void Record(unsigned char* buffer, int buffer_size) {
 
         // Record some data
         if (pa_simple_read(s, buffer, buffer_size, &error) < 0) {
-            fprintf(stderr, __FILE__": pa_simple_read() failed: %s\n", pa_strerror(error));
+            std::cerr << ": pa_simple_read() failed: " << pa_strerror(error) << std::endl;
         }
 
     }    

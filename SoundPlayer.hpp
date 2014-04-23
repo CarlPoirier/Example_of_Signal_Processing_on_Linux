@@ -17,7 +17,7 @@ public:
         // set the output format
         format.bits = 16;
         format.rate = 44100;
-        format.channels = 2;
+        format.channels = 1;
         format.byte_format = AO_FMT_NATIVE;
         format.matrix = 0;
         
@@ -30,9 +30,9 @@ public:
     }
 
 
-    void Play(int16_t* buffer, int buffer_size) {
+    void Play(unsigned char* buffer, int buffer_size) {
 
-        ao_play(dev, (char*) buffer, buffer_size);
+        ao_play(dev, (char*)buffer, buffer_size);
 
     }    
 

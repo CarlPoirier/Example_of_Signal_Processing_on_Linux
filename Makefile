@@ -1,2 +1,2 @@
 all:
-	g++ -std=c++11 -O2 -o SigProc main.cpp -lao -lpulse-simple -lpulse
+	g++ -std=c++11 -g -o SigProc main.cpp -lmpg123 -lao -lpulse-simple -lpulse
